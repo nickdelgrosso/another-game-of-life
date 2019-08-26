@@ -51,5 +51,5 @@ class PyxelApp(BaseApp):
 
 
 def main():
-    app = PyxelApp()
+    app = PyxelApp(perc=.5)
     app.run()

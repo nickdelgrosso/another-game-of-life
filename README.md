@@ -8,7 +8,7 @@ as an evening kata to practice domain-driven design, test-driven-design and clea
 
 ## Installation
 ```
-pip install another-game-of-life
+pip install git+https://github.com/nickdelgrosso/another-game-of-life
 ``` 
 
 
