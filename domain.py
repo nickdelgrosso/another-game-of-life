@@ -1,13 +1,13 @@
-from typing import NewType, Dict, Tuple, List, Generator, Iterable, Optional
+from typing import NewType, Dict, Tuple, List, Generator, Optional, Iterator
 from itertools import product
 import random
-import pyxel as px
+
 
 Cell = Tuple[int, int]
 Board = NewType("LifeBoard", Dict[Cell, bool])
 
 
-def get_neighbors(cell: Cell) -> Iterable[Cell]:
+def get_neighbors(cell: Cell) -> Iterator[Cell]:
     """Get all neighbors of the cell."""
     x, y = cell
     for dx, dy in product([-1, 0, 1], [-1, 0, 1]):
@@ -65,7 +65,7 @@ def view_board(board: Board) -> BoardView:
     return view
 
 
-def run_game(width: int, height: int, seed: Optional[int] = None, perc: float = 0.4) -> Iterable[BoardView]:
+def run_game(width: int, height: int, seed: Optional[int] = None, perc: float = 0.4) -> Iterator[BoardView]:
     """Main Game of Life Function."""
     board = seed_board(create_board(width=width, height=height), seed=seed, perc=perc)
     while True:
