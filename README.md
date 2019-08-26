@@ -3,6 +3,8 @@
 This is a short implementation of [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), made 
 as an evening kata to practice domain-driven design, test-driven-design and clean architecture.
 
+![GameScreenshots](img/screenshots.gif)
+
 
 ## Installation
 ```
@@ -18,6 +20,13 @@ Once the game's installed, it should be runnable directly from the terminal with
 agol
 ```
 
+
+## Controls:
+
+  - Space to restart
+  - Escape to quit
+  - Alt-Enter to go Fullscreen
+  - Alt-3 to save gif of past 30-seconds of gameplay to desktop
 
 ## ToDo:
 
