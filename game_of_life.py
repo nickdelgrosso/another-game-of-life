@@ -1,5 +1,7 @@
-from typing import NewType, Dict, Tuple, List, Generator, Iterable
+from typing import NewType, Dict, Tuple, List, Generator, Iterable, Optional
 from itertools import product
+import random
+import pyxel as px
 
 Cell = Tuple[int, int]
 Board = NewType("LifeBoard", Dict[Cell, bool])
@@ -17,6 +19,16 @@ def get_neighbors(cell: Cell) -> Iterable[Cell]:
 def create_board(width=10, height=10):
     board: Board = {(x, y): False for x, y in product(list(range(width)), list(range(height)))}
     return board
+
+
+def seed_board(board: Board, seed: Optional[int] = None, perc: float = 0.2) -> Board:
+    """adds a percentage of living cells to an existing board."""
+    if not 0. <= perc <= 1.:
+        raise ValueError("percentage should be between 0 and 1.")
+    if seed is not None:
+        random.seed(seed)
+    new_board: Board = {cell: True if random.random() <= perc else is_alive for cell, is_alive in board.items()}
+    return new_board
 
 
 def count_live_neighbors(cell: Cell, board: Board) -> int:
@@ -53,5 +65,10 @@ def view_board(board: Board) -> BoardView:
     return view
 
 
+def update_game(board: Board) -> Iterable[Board]:
+    while True:
+        yield update_board(board=board)
 
 
+def render_game(width=20, height=20):
+    pass
