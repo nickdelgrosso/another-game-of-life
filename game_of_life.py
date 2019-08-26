@@ -23,3 +23,23 @@ def create_board(width=10, height=10):
 def count_live_neighbors(cell: Cell, board: Board) -> int:
     return sum(board.get(neighbor, False) for neighbor in get_neighbors(cell=cell))
 
+
+def is_alive(cell: Cell, board: Board) -> bool:
+    return board[cell]
+
+
+def should_flip_cell(cell: Cell, board: Board) -> bool:
+    """
+    Implement neighbor rules to say whether cell should flip.
+
+    Source: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules
+    """
+    n_neighbors = count_live_neighbors(cell=cell, board=board)
+    if is_alive(cell=cell, board=board):
+        return False if 1 < n_neighbors < 4 else True
+    else:
+        return True if n_neighbors == 3 else False
+
+
+
+

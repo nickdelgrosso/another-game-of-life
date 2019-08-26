@@ -1,6 +1,6 @@
 from hypothesis import given
 from hypothesis.strategies import integers
-from game_of_life import get_neighbors, count_live_neighbors, Board, Cell, create_board
+from game_of_life import get_neighbors, count_live_neighbors, Board, Cell, create_board, should_flip_cell
 from pytest import fixture
 
 
@@ -53,4 +53,15 @@ def test_neighboar_count_on_board_fringe_still_works(board):
 def test_neighbor_count_beyond_board_is_0(board):
     assert count_live_neighbors(board=board, cell=(10, 10)) == 0
     assert count_live_neighbors(board=board, cell=(-2, -2)) == 0
+
+
+def test_if_flip_rules_are_correct(board):
+    assert should_flip_cell(board=board, cell=(0, 0))
+    assert should_flip_cell(board=board, cell=(1, 0))
+    assert not should_flip_cell(board=board, cell=(2, 0))
+    assert not should_flip_cell(board=board, cell=(3, 0))
+    assert not should_flip_cell(board=board, cell=(0, 2))
+    assert not should_flip_cell(board=board, cell=(0, 3))
+    assert should_flip_cell(board=board, cell=(2, 3))
+    assert not should_flip_cell(board=board, cell=(2, 2))
 
