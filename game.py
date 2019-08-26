@@ -65,10 +65,10 @@ def view_board(board: Board) -> BoardView:
     return view
 
 
-def update_game(board: Board) -> Iterable[Board]:
+def run_game(width: int, height: int, seed: Optional[int] = None, perc: float = 0.4) -> Iterable[BoardView]:
+    """Main Game of Life Function."""
+    board = seed_board(create_board(width=width, height=height), seed=seed, perc=perc)
     while True:
-        yield update_board(board=board)
+        yield view_board(board)
+        board = update_board(board=board)
 
-
-def render_game(width=20, height=20):
-    pass
