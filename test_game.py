@@ -1,7 +1,10 @@
 from game_of_life import get_neighbors
+from hypothesis import given
+from hypothesis.strategies import integers
 
-def test_neighbors():
-    x, y = 2, 3
+
+@given(integers(), integers())
+def test_neighbors(x, y):
     cell = (x, y)
 
     for idx, neighbor in enumerate(get_neighbors(cell)):
