@@ -2,7 +2,8 @@ from typing import NewType, Dict, Tuple, List, Generator, Iterable
 from itertools import product
 
 Cell = Tuple[int, int]
-Board = NewType("Board", Dict[Cell, bool])
+Board = NewType("LifeBoard", Dict[Cell, bool])
+
 
 
 def get_neighbors(cell: Cell) -> Iterable[Cell]:
@@ -14,6 +15,11 @@ def get_neighbors(cell: Cell) -> Iterable[Cell]:
             yield neighbor
 
 
+def create_board(width=10, height=10):
+    board: Board = {(x, y): False for x, y in product(list(range(width)), list(range(height)))}
+    return board
 
 
+def count_live_neighbors(cell: Cell, board: Board) -> int:
+    return sum(board.get(neighbor, False) for neighbor in get_neighbors(cell=cell))
 
