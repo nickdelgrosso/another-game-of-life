@@ -53,7 +53,7 @@ def should_flip_cell(cell: Cell, board: Board) -> bool:
 
 
 def update_board(board: Board) -> Board:
-    new_board: Board = {cell: not should_flip_cell(cell, board) for cell in board}
+    new_board: Board = {cell: not value if should_flip_cell(cell, board) else value for cell, value in board.items()}
     return new_board
 
 
