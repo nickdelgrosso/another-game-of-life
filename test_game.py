@@ -1,17 +1,22 @@
 from hypothesis import given
 from hypothesis.strategies import integers
-from game_of_life import get_neighbors, count_live_neighbors, Board, Cell, create_board, should_flip_cell
+from game_of_life import get_neighbors, count_live_neighbors, Board, Cell, create_board, should_flip_cell, BoardView, view_board
 from pytest import fixture
 
 
 @fixture
-def board() -> Board:
-    orig_board = [[True,  False, False, False, False],
-                  [False, True,  True,  False, True],
-                  [True,  True,  False, False, True],
-                  [True,  False, True,  False, False]]
+def view() -> BoardView:
+    view: BoardView = [[True,  False, False, False, False],
+                       [False, True,  True,  False, True],
+                       [True,  True,  False, False, True],
+                       [True,  False, True,  False, False]]
+    return view
+
+
+@fixture
+def board(view):
     board: Board = {}
-    for yi, line in enumerate(orig_board):
+    for yi, line in enumerate(view):
         for xi, cell in enumerate(line):
             loc: Cell = (xi, yi)
             board[loc] = cell
@@ -65,3 +70,7 @@ def test_if_flip_rules_are_correct(board):
     assert should_flip_cell(board=board, cell=(2, 3))
     assert not should_flip_cell(board=board, cell=(2, 2))
 
+
+
+def test_board_view(view, board):
+    assert view_board(board) == view

@@ -5,7 +5,6 @@ Cell = Tuple[int, int]
 Board = NewType("LifeBoard", Dict[Cell, bool])
 
 
-
 def get_neighbors(cell: Cell) -> Iterable[Cell]:
     """Get all neighbors of the cell."""
     x, y = cell
@@ -39,6 +38,19 @@ def should_flip_cell(cell: Cell, board: Board) -> bool:
         return False if 1 < n_neighbors < 4 else True
     else:
         return True if n_neighbors == 3 else False
+
+
+def update_board(board: Board) -> Board:
+    new_board: Board = {cell: not should_flip_cell(cell, board) for cell in board}
+    return new_board
+
+
+BoardView = NewType("BoardView", List[List[bool]])
+def view_board(board: Board) -> BoardView:
+    width = max(board, key=lambda x: x[0])[0] + 1
+    height = max(board, key=lambda x: x[1])[1] + 1
+    view: BoardView = [[board[(x, y)] for x in range(width)] for y in range(height)]
+    return view
 
 
 
