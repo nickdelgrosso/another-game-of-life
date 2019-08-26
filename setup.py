@@ -12,7 +12,7 @@ setup(
     install_requires=['pyxel'],
     description="Simple Conway's Game of Life implementation, rendered with Pyxel.",
     entry_points={
-        'console_scripts': ['game_of_life=game_of_life.app:main'],
+        'console_scripts': ['agol=game_of_life.app:main'],
     },
     classifiers=[
         "Programming Language :: Python :: 3.6",
