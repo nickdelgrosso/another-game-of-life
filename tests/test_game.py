@@ -1,6 +1,6 @@
 from hypothesis import given
 from hypothesis.strategies import integers
-from domain import get_neighbors, count_live_neighbors, Board, Cell, create_board, should_flip_cell, BoardView, view_board
+from game_of_life.domain import get_neighbors, count_live_neighbors, Board, Cell, create_board, should_flip_cell, BoardView, view_board
 from pytest import fixture
 
 
